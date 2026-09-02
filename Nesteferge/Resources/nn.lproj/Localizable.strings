@@ -1,0 +1,70 @@
+/* Nesteferge — Nynorsk */
+
+"app.title" = "Nesteferge";
+
+/* Actions */
+"action.rescan" = "Søk på nytt";
+"action.settings" = "Innstillingar";
+"action.openSettings" = "Opne Innstillingar";
+"action.done" = "Ferdig";
+
+/* Locating & guessing */
+"locating.status" = "Ser etter ferjer i nærleiken …";
+"guess.emptyTitle" = "Fann inga ferje";
+"guess.none" = "Ingen norske ferjekaiar innanfor 600 km. Søk etter eit samband i staden, eller søk på nytt når du er nærmare.";
+
+/* Candidate list */
+"section.nearby" = "Ferjer i nærleiken";
+"candidate.bestGuess" = "Beste gjett";
+"candidate.selected" = "Vald";
+"candidate.offCourse" = "%d° unna kursen";
+"hint.heading" = "Toppvalet vektar avstand høgast og retning som støtte. Trykk på eit anna om det er feil.";
+"hint.noHeading" = "Sortert etter avstand (inga retning tilgjengeleg). Trykk på ferja di.";
+"hint.search" = "Søkjeresultat. Trykk på sambandet ditt.";
+
+/* Departures */
+"departures.loading" = "Lastar avgangar …";
+"departures.departsAt" = "Går %1$@ · %2$@";
+"departures.noneToday" = "Ingen fleire avgangar i dag.";
+"day.today" = "I dag";
+"day.tomorrow" = "I morgon";
+
+/* Search */
+"search.prompt" = "Søk etter kai, samband eller stad";
+"search.searching" = "Søkjer …";
+"search.keepTyping" = "Skriv minst 2 teikn for å søkje.";
+"search.noResults" = "Ingen treff for «%@».";
+
+/* Location errors */
+"location.denied" = "Posisjonstilgang avslått. Slå det på for å finne ferja di.";
+"location.restricted" = "Posisjonstilgang er avgrensa på denne eininga.";
+"location.unavailable" = "Klarte ikkje å bestemme posisjonen din. Prøv igjen med fri sikt til himmelen.";
+"location.timeout" = "Tidsavbrot ved posisjonering. Prøv igjen.";
+
+/* API errors */
+"error.badURL" = "API-adressa er ikkje gyldig.";
+"error.requestFailed" = "Førespurnaden mislukkast (%d)";
+"error.badResponse" = "Uventa svar frå tenaren. (%@)";
+"error.noResponse" = "Ingen svar frå tenaren.";
+"error.notFound" = "Ikkje funne.";
+"error.invalidRequest" = "Ugyldig førespurnad.";
+
+/* Settings */
+"settings.serverSection" = "Tenar";
+"settings.apiURL" = "API-adresse";
+"settings.urlFooter" = "Nesteferge-API-et appen hentar rutetider frå.";
+"settings.invalidURL" = "Skriv inn ei gyldig http- eller https-adresse.";
+"settings.reset" = "Tilbakestill til standard";
+"settings.testConnection" = "Test tilkopling";
+"settings.healthOK" = "%1$@ · %2$d kaiar · %3$d samband";
+"settings.version" = "Versjon";
+
+/* CarPlay */
+"carplay.nearbyTitle" = "Ferjer i nærleiken";
+"carplay.locatingTitle" = "Ser etter ferjer …";
+"carplay.emptyTitle" = "Ingen ferjer i nærleiken";
+"carplay.emptySubtitle" = "Køyr nærmare ei kai og trykk Søk på nytt.";
+"carplay.departsIn" = "Går om";
+"carplay.then" = "Deretter · %@";
+"carplay.route" = "Samband";
+"carplay.status" = "Status";

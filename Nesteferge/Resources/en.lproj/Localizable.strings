@@ -1,0 +1,70 @@
+/* Nesteferge — English (base) */
+
+"app.title" = "Nesteferge";
+
+/* Actions */
+"action.rescan" = "Rescan";
+"action.settings" = "Settings";
+"action.openSettings" = "Open Settings";
+"action.done" = "Done";
+
+/* Locating & guessing */
+"locating.status" = "Looking for ferries nearby…";
+"guess.emptyTitle" = "No ferry found";
+"guess.none" = "No Norwegian ferry quays within 600 km of you. Search for a route instead, or rescan when you're closer.";
+
+/* Candidate list */
+"section.nearby" = "Ferries nearby";
+"candidate.bestGuess" = "Best guess";
+"candidate.selected" = "Selected";
+"candidate.offCourse" = "%d° off course";
+"hint.heading" = "The top pick weights distance first, with your heading as extra context. Tap another if it's wrong.";
+"hint.noHeading" = "Sorted by distance (no heading available). Tap your ferry.";
+"hint.search" = "Search results. Tap your route.";
+
+/* Departures */
+"departures.loading" = "Loading departures…";
+"departures.departsAt" = "Departs %1$@ · %2$@";
+"departures.noneToday" = "No more sailings today.";
+"day.today" = "Today";
+"day.tomorrow" = "Tomorrow";
+
+/* Search */
+"search.prompt" = "Search quay, route or place";
+"search.searching" = "Searching…";
+"search.keepTyping" = "Type at least 2 characters to search.";
+"search.noResults" = "No matches for \"%@\".";
+
+/* Location errors */
+"location.denied" = "Location permission denied. Enable it to find your ferry.";
+"location.restricted" = "Location access is restricted on this device.";
+"location.unavailable" = "Couldn't determine your position. Try again with a clear view of the sky.";
+"location.timeout" = "Locating timed out. Please try again.";
+
+/* API errors */
+"error.badURL" = "The API address is not valid.";
+"error.requestFailed" = "Request failed (%d)";
+"error.badResponse" = "Unexpected response from the server. (%@)";
+"error.noResponse" = "No response from the server.";
+"error.notFound" = "Not found.";
+"error.invalidRequest" = "Invalid request.";
+
+/* Settings */
+"settings.serverSection" = "Server";
+"settings.apiURL" = "API base URL";
+"settings.urlFooter" = "The Nesteferge API this app reads timetables from.";
+"settings.invalidURL" = "Enter a valid http or https address.";
+"settings.reset" = "Reset to default";
+"settings.testConnection" = "Test connection";
+"settings.healthOK" = "%1$@ · %2$d terminals · %3$d routes";
+"settings.version" = "Version";
+
+/* CarPlay */
+"carplay.nearbyTitle" = "Nearby ferries";
+"carplay.locatingTitle" = "Looking for ferries…";
+"carplay.emptyTitle" = "No ferries nearby";
+"carplay.emptySubtitle" = "Drive closer to a quay, then tap Rescan.";
+"carplay.departsIn" = "Departs in";
+"carplay.then" = "Then · %@";
+"carplay.route" = "Route";
+"carplay.status" = "Status";

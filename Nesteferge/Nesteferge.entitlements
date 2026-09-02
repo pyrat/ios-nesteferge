@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Nesteferge is a "driving task" CarPlay app: it shows a short list and a
+	  countdown, which is exactly the category's intended scope (CPListTemplate +
+	  CPInformationTemplate). It is not a navigation/maps app.
+
+	  Shipping to a real head unit or the App Store requires Apple to grant this
+	  entitlement first: https://developer.apple.com/carplay/
+
+	  The Simulator is awkward, and the two facts below are both true:
+
+	    1. WITHOUT this entitlement the app does not appear on the CarPlay home
+	       screen at all. The Info.plist scene manifest alone is NOT sufficient.
+
+	    2. WITH this entitlement applied by `codesign`, AMFI rejects the binary and
+	       the app cannot launch: POSIX 153 (EBADEXEC), surfaced as the misleading
+	       "request was denied by service delegate (SBMainWorkspace)".
+
+	  xcodebuild does not resolve this: it silently strips the key from the
+	  generated .xcent because no provisioning profile grants it, so a plain build
+	  is launchable but invisible in CarPlay.
+
+	  scripts/run-carplay.sh works around it with a two-pass install:
+	    a. sign with this file and install  -> registers the CarPlay capability
+	    b. sign without it and install OVER the top (no uninstall in between)
+	       -> restores a launchable binary; the registration from (a) persists
+
+	  Do not `simctl uninstall` between the two passes, and re-run the script after
+	  erasing the device, since erasing clears the registration.
+	-->
+	<key>com.apple.developer.carplay-driving-task</key>
+	<true/>
+</dict>
+</plist>
