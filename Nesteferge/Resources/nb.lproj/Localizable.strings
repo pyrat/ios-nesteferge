@@ -10,6 +10,7 @@
 
 /* Locating & guessing */
 "locating.status" = "Ser etter ferjer i nærheten …";
+"locating.hint" = "Bruker GPS og retning for å gjette hvilken ferje du kjører mot.";
 "guess.emptyTitle" = "Fant ingen ferje";
 "guess.none" = "Ingen norske ferjekaier innenfor 600 km. Søk etter et samband i stedet, eller søk på nytt når du er nærmere.";
 

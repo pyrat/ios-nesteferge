@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// One row in the nearby-ferries list.
 struct CandidateRow: View {
     let candidate: GuessCandidate
     let isBestGuess: Bool
@@ -8,56 +7,53 @@ struct CandidateRow: View {
     let isSelected: Bool
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(legText)
-                    .font(.body)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(FerryTheme.text)
                 Text(candidate.routeName)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .foregroundStyle(FerryTheme.muted)
                 if isBestGuess {
                     Text("candidate.bestGuess", comment: "Badge on the top-ranked nearby ferry")
-                        .font(.caption2.weight(.semibold))
+                        .font(.caption2.weight(.bold))
                         .textCase(.uppercase)
-                        .foregroundStyle(.tint)
+                        .foregroundStyle(FerryTheme.accent)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(FerryTheme.accent.opacity(0.15), in: Capsule())
                 }
             }
 
-            Spacer(minLength: 12)
+            Spacer(minLength: 4)
 
-            VStack(alignment: .trailing, spacing: 2) {
-                if let distance = distanceText {
-                    Text(distance)
-                }
+            VStack(alignment: .trailing, spacing: 4) {
+                if let distance = distanceText { Text(distance) }
                 if showsHeadingOffset, let offset = candidate.headingOffsetDeg {
                     Text(DepartureFormatter.headingOffset(degrees: offset))
                 }
             }
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(FerryTheme.muted)
 
-            if isSelected {
-                Image(systemName: "checkmark")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(.tint)
-                    .accessibilityLabel(Text("candidate.selected", comment: "Accessibility label for the chosen ferry"))
-            }
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "arrow.right")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(FerryTheme.accent)
         }
+        .padding(14)
+        .background(isSelected ? FerryTheme.cardHighlight : FerryTheme.card, in: RoundedRectangle(cornerRadius: 16))
+        .overlay { RoundedRectangle(cornerRadius: 16).stroke(isSelected ? FerryTheme.accent : .clear, lineWidth: 1) }
         .contentShape(.rect)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
     private var legText: String {
-        guard let destination = candidate.destination, !destination.isEmpty else {
-            return candidate.origin
-        }
+        guard let destination = candidate.destination, !destination.isEmpty else { return candidate.origin }
         return "\(candidate.origin) → \(destination)"
     }
 
-    /// Search-sourced candidates carry no distance (NaN), so fall back to county.
     private var distanceText: String? {
-        if candidate.distanceKm.isFinite {
-            return DepartureFormatter.distance(km: candidate.distanceKm)
-        }
-        return candidate.county
+        candidate.distanceKm.isFinite ? DepartureFormatter.distance(km: candidate.distanceKm) : candidate.county
     }
 }
