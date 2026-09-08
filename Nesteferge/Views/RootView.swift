@@ -17,7 +17,8 @@ struct RootView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     @State private var searchText = ""
-    @State private var isShowingSettings = false
+    @State private var isSearchActive = false
+    @FocusState private var isSearchFieldFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -32,7 +33,6 @@ struct RootView: View {
                 content
             }
             .toolbar(.hidden, for: .navigationBar)
-            .sheet(isPresented: $isShowingSettings) { SettingsView() }
         }
         .tint(FerryTheme.accent)
         .preferredColorScheme(.dark)
@@ -44,7 +44,7 @@ struct RootView: View {
 
     @ViewBuilder
     private var content: some View {
-        if !searchText.trimmingCharacters(in: .whitespaces).isEmpty {
+        if isSearchActive {
             searchList
         } else {
             switch store.phase {
@@ -58,7 +58,23 @@ struct RootView: View {
         }
     }
 
-    private var header: some View {
+    /// Opens the search UI and puts the keyboard up straight away: every route
+    /// into search is an explicit request to type something.
+    private func activateSearch() {
+        isSearchActive = true
+        isSearchFieldFocused = true
+    }
+
+    private func dismissSearch() {
+        isSearchActive = false
+        isSearchFieldFocused = false
+        searchText = ""
+        store.clearSearch()
+    }
+
+    /// - Parameter showsSearch: only the loaded screen needs the button; the
+    ///   locating and failure screens already show the search field inline.
+    private func header(showsSearch: Bool = false) -> some View {
         HStack(spacing: 12) {
             Text("app.title", comment: "App name shown at the top of the screen")
                 .font(.caption.weight(.bold))
@@ -68,10 +84,12 @@ struct RootView: View {
 
             Spacer()
 
-            Button { isShowingSettings = true } label: {
-                Image(systemName: "gearshape")
+            if showsSearch {
+                Button { activateSearch() } label: {
+                    Image(systemName: "magnifyingglass")
+                }
+                .accessibilityLabel(Text("action.search", comment: "Opens the route search field"))
             }
-            .accessibilityLabel(Text("action.settings", comment: "Opens the app's settings sheet"))
 
             Button { store.locateAndGuess() } label: {
                 Image(systemName: "location.fill")
@@ -85,7 +103,7 @@ struct RootView: View {
 
     private var locatingView: some View {
         VStack(spacing: 24) {
-            header
+            header()
 
             Spacer()
 
@@ -123,7 +141,7 @@ struct RootView: View {
 
     private func failureView(_ message: String) -> some View {
         VStack(spacing: 24) {
-            header
+            header()
             Spacer()
             Image(systemName: "ferry.fill")
                 .font(.system(size: 46))
@@ -157,7 +175,7 @@ struct RootView: View {
     private var mainList: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                header
+                header(showsSearch: true)
                 CountdownView(store: store)
 
                 Divider().overlay(FerryTheme.muted.opacity(0.2))
@@ -179,6 +197,27 @@ struct RootView: View {
                         .font(.footnote)
                         .foregroundStyle(FerryTheme.muted)
                         .padding(.top, 4)
+
+                    // Second way into search, placed where someone realises the
+                    // guess is wrong. The header button covers the case where
+                    // they knew that before the screen even loaded.
+                    Button { activateSearch() } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundStyle(FerryTheme.accent)
+                            Text("search.allRoutes", comment: "Opens search for any route in the country")
+                                .font(.subheadline.weight(.medium))
+                                .foregroundStyle(FerryTheme.text)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.footnote)
+                                .foregroundStyle(FerryTheme.muted)
+                        }
+                        .padding(14)
+                        .background(FerryTheme.card.opacity(0.6), in: RoundedRectangle(cornerRadius: 16))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.top, 4)
                 }
             }
             .padding(.horizontal, 20)
@@ -190,8 +229,16 @@ struct RootView: View {
     private var searchList: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                header
-                routeSearchField
+                header()
+
+                HStack(spacing: 12) {
+                    routeSearchField
+                    Button { dismissSearch() } label: {
+                        Text("action.cancel", comment: "Leaves search and returns to the nearby ferries")
+                    }
+                    .foregroundStyle(FerryTheme.accent)
+                }
+
                 sectionLabel("search.prompt")
 
                 if store.isSearching {
@@ -202,7 +249,7 @@ struct RootView: View {
                     ForEach(store.searchResults, id: \.self) { result in
                         Button {
                             store.select(result)
-                            searchText = ""
+                            dismissSearch()
                         } label: {
                             SearchResultRow(result: result)
                         }
@@ -222,11 +269,18 @@ struct RootView: View {
             TextField("search.prompt", text: $searchText, prompt: Text("search.prompt", comment: "Route search field placeholder"))
                 .textInputAutocapitalization(.words)
                 .autocorrectionDisabled()
+                .submitLabel(.search)
+                .focused($isSearchFieldFocused)
                 .foregroundStyle(FerryTheme.text)
                 .onChange(of: searchText) { _, newValue in
                     if newValue.trimmingCharacters(in: .whitespaces).isEmpty {
                         store.clearSearch()
                     } else {
+                        // The locating and failure screens show this field inline,
+                        // so typing there has to switch to the results list too.
+                        // Only ever latches on: clearing the text keeps you in
+                        // search so you can retype. Cancel is the way out.
+                        isSearchActive = true
                         store.search(newValue)
                     }
                 }

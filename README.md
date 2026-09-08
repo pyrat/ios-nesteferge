@@ -44,15 +44,18 @@ xcrun simctl location booted set 62.39,6.33
 
 ### Pointing at a different API
 
-The base URL defaults to `http://localhost:8000` and can be changed two ways, in
-increasing precedence:
+The base URL is fixed at build time: there is deliberately no in-app editor for
+it. It comes from the `NESTEFERGE_API_BASE_URL` build setting, which is
+substituted into `Info.plist` as `NestefergeAPIBaseURL` and read once by
+`AppSettings.baseURL`. It defaults to `https://nesteferge.no`.
 
-1. The `NESTEFERGE_API_BASE_URL` build setting (baked into `Info.plist`).
-2. The **Settings** sheet in the app (gear icon), which persists to `UserDefaults`.
-   It has a *Test connection* button that pings `/api/health`.
+To develop against a local `cmd/ferrytimes-api`, change that build setting to
+`http://localhost:8000`. App Transport Security only permits cleartext HTTP for
+`localhost`; any other host must be HTTPS.
 
-App Transport Security only permits cleartext HTTP for `localhost`; any other host
-must be HTTPS.
+If the setting is missing, empty, or left as an unexpanded `$(...)` token,
+`AppSettings` falls back to the production URL hard-coded in Swift. A test
+asserts the two cannot silently drift apart.
 
 ## CarPlay
 
@@ -88,7 +91,10 @@ The car UI is intentionally a reduced version of the phone:
 - A `CPListTemplate` of nearby ferries, populated automatically on connect, with a
   **Rescan** bar button.
 - Tapping one pushes a `CPInformationTemplate` with the countdown, the next
-  departure and the two after it, refreshed in place once a second.
+  departure and the two after it, refreshed in place every 10 seconds.
+- **Minute-resolution countdown.** The guide forbids driving task apps from
+  refreshing data items more than once every 10 seconds, so the car shows
+  `12 min` rather than the phone's ticking `mm:ss`.
 - **No text search.** Typing a quay name is not something to be doing while
   driving, and CarPlay's list limits make it a poor fit anyway.
 
@@ -96,7 +102,9 @@ Phone and car share one `FerryStore`, so selecting a ferry in one updates the ot
 
 > **Entitlement:** shipping CarPlay to a real head unit or the App Store requires
 > `com.apple.developer.carplay-driving-task`, which Apple must grant
-> (<https://developer.apple.com/carplay/>).
+> (<https://developer.apple.com/carplay/>). The request text, the post-approval
+> signing steps and the driving task guidelines the CarPlay UI is written against
+> are in [`docs/carplay-entitlement-request.md`](docs/carplay-entitlement-request.md).
 >
 > The Simulator needs it too, and this is genuinely awkward:
 >
@@ -120,17 +128,18 @@ Nesteferge/
   App/        NestefergeApp.swift          SwiftUI entry point
   Core/       Models.swift                 Codable mirrors of openapi.yaml
               APIClient.swift              actor; async GETs, error mapping
-              AppSettings.swift            base URL + last selection (UserDefaults)
+              AppSettings.swift            fixed base URL + last selection
               LocationService.swift        CLLocationManager → single async fix
               DepartureFormatter.swift     countdown / clock / day labels (Europe/Oslo)
               FerryStore.swift             @Observable single source of truth
-  Views/      RootView, CountdownView, CandidateRow, SettingsView
+  Views/      RootView, CountdownView, CandidateRow
   CarPlay/    CarPlaySceneDelegate.swift   CPListTemplate + CPInformationTemplate
   Resources/  Assets.xcassets, en/nb/nn.lproj
 ```
 
 `FerryStore` owns the whole lifecycle — guess, selection, departures, the 1 Hz
 countdown and the 60 s schedule refetch — and both UIs are thin renderers over it.
+The phone renders at 1 Hz; CarPlay samples the same state every 10 s.
 The refetch is what keeps the list correct across midnight; timers are suspended
 when the app is not active.
 
@@ -162,7 +171,7 @@ app's i18n table. The language follows the system setting.
   that `heading` is omitted when unavailable) and 404/422/500 error mapping.
 - `DepartureFormatterTests` — countdown formatting, Oslo clock rendering and day
   labels across midnight.
-- `AppSettingsTests` — URL normalisation and selection persistence.
+- `AppSettingsTests` — base URL resolution and selection persistence.
 
 ```sh
 xcodebuild -scheme Nesteferge -destination 'platform=iOS Simulator,name=iPhone 16' test

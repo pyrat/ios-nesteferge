@@ -41,6 +41,40 @@ struct DepartureFormatterTests {
         #expect(DepartureFormatter.countdown(seconds: -30) == "00:00")
     }
 
+    // MARK: - Coarse countdown (CarPlay)
+
+    @Test("Under a minute avoids showing a misleading '0 min'")
+    func coarseCountdownImminent() {
+        #expect(DepartureFormatter.coarseCountdown(seconds: 0) == "Under 1 min")
+        #expect(DepartureFormatter.coarseCountdown(seconds: 59) == "Under 1 min")
+        #expect(DepartureFormatter.coarseCountdown(seconds: -30) == "Under 1 min")
+    }
+
+    @Test("Minutes round down, so the sailing is never announced as later than it is")
+    func coarseCountdownRoundsDown() {
+        #expect(DepartureFormatter.coarseCountdown(seconds: 60) == "1 min")
+        // 119s is 1m59s: must not round up to 2 min.
+        #expect(DepartureFormatter.coarseCountdown(seconds: 119) == "1 min")
+        #expect(DepartureFormatter.coarseCountdown(seconds: 3599) == "59 min")
+    }
+
+    @Test("An hour or more splits into hours and minutes")
+    func coarseCountdownHours() {
+        #expect(DepartureFormatter.coarseCountdown(seconds: 3600) == "1 h 0 min")
+        #expect(DepartureFormatter.coarseCountdown(seconds: 3660) == "1 h 1 min")
+        #expect(DepartureFormatter.coarseCountdown(seconds: 7500) == "2 h 5 min")
+    }
+
+    @Test("The coarse countdown never renders seconds")
+    func coarseCountdownHasNoSeconds() {
+        // Guards the CarPlay 10-second refresh rule: a seconds digit would either
+        // breach it or visibly jump. Sample across a wide range of offsets.
+        for seconds in stride(from: 0, through: 7200, by: 7) {
+            let rendered = DepartureFormatter.coarseCountdown(seconds: seconds)
+            #expect(!rendered.contains(":"), "unexpected clock formatting: \(rendered)")
+        }
+    }
+
     // MARK: - Clock
 
     @Test("Departure time is rendered in Oslo, not the device time zone")

@@ -18,7 +18,14 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
     private var listTemplate: CPListTemplate?
     private var informationTemplate: CPInformationTemplate?
 
-    /// Drives the 1 Hz refresh of the detail screen.
+    /// Minimum permitted refresh cadence for a CarPlay driving task app.
+    ///
+    /// The CarPlay Developer Guide: "Do not periodically refresh data items in the
+    /// CarPlay UI more than once every 10 seconds." Do not lower this — the phone
+    /// UI is where the 1 Hz `mm:ss` countdown lives.
+    private static let countdownRefreshInterval = 10
+
+    /// Drives the periodic refresh of the detail screen.
     private var countdownTask: Task<Void, Never>?
     /// Rebuilds templates whenever the shared store changes.
     private var observationTask: Task<Void, Never>?
@@ -193,7 +200,7 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
 
         let countdown: String
         if let seconds = store.secondsUntilNextDeparture {
-            countdown = DepartureFormatter.countdown(seconds: seconds)
+            countdown = DepartureFormatter.coarseCountdown(seconds: seconds)
         } else {
             countdown = store.isLoadingDepartures ? "…" : "—"
         }
@@ -244,7 +251,7 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         countdownTask?.cancel()
         countdownTask = Task { [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(1))
+                try? await Task.sleep(for: .seconds(Self.countdownRefreshInterval))
                 guard !Task.isCancelled else { return }
                 // Task inherits main-actor isolation from this method.
                 self?.refreshInformation()

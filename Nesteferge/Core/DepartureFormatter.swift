@@ -12,6 +12,8 @@ enum DepartureFormatter {
     }()
 
     /// `mm:ss` under an hour, `h:mm:ss` beyond. Negative input clamps to zero.
+    ///
+    /// Phone only. The car uses ``coarseCountdown(seconds:)`` — see the note there.
     static func countdown(seconds: Int) -> String {
         let total = max(0, seconds)
         let hours = total / 3600
@@ -21,6 +23,37 @@ enum DepartureFormatter {
             return String(format: "%d:%02d:%02d", hours, minutes, secs)
         }
         return String(format: "%02d:%02d", minutes, secs)
+    }
+
+    /// Minute-resolution countdown for CarPlay, e.g. `12 min` or `1 t 5 min`.
+    ///
+    /// The CarPlay Developer Guide forbids driving task apps from refreshing data
+    /// items more than once every 10 seconds, so a ticking `mm:ss` display is not
+    /// permitted in the car: it would either breach the rule or visibly jump in
+    /// 10-second steps. Minutes stay honest at that cadence, and are the useful
+    /// unit when the question is "do I make this sailing?".
+    ///
+    /// Rounds down, so `59 s` reads as "under a minute" rather than "1 min".
+    static func coarseCountdown(seconds: Int) -> String {
+        let total = max(0, seconds)
+        let totalMinutes = total / 60
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+
+        if totalMinutes < 1 {
+            return String(localized: "countdown.imminent", defaultValue: "Under 1 min")
+        }
+        if hours > 0 {
+            return String(
+                format: String(localized: "countdown.hoursMinutes", defaultValue: "%1$d h %2$d min"),
+                hours,
+                minutes
+            )
+        }
+        return String(
+            format: String(localized: "countdown.minutes", defaultValue: "%d min"),
+            minutes
+        )
     }
 
     /// Wall-clock departure time in Oslo, e.g. `15:40`.

@@ -13,52 +13,30 @@ struct AppSettingsTests {
         return AppSettings(defaults: defaults)
     }
 
-    @Test("Bare host:port is upgraded to an http URL")
-    func normalizesBareHost() {
-        let url = AppSettings.normalizedURL(from: "localhost:8000")
-        #expect(url?.absoluteString == "http://localhost:8000")
+    @Test("The base URL is a usable https endpoint")
+    func baseURLIsUsable() {
+        let url = AppSettings.baseURL
+        #expect(url.scheme == "https" || url.scheme == "http")
+        #expect(url.host?.isEmpty == false)
     }
 
-    @Test("Explicit schemes are preserved")
-    func preservesScheme() {
-        #expect(AppSettings.normalizedURL(from: "https://api.example.com")?.scheme == "https")
+    @Test("The base URL matches the value baked into Info.plist")
+    func baseURLMatchesBundle() {
+        // Guards against the Swift fallback and the NESTEFERGE_API_BASE_URL build
+        // setting drifting apart: a test build should read the configured value,
+        // not silently fall back.
+        let raw = Bundle(for: BundleMarker.self)
+            .object(forInfoDictionaryKey: "NestefergeAPIBaseURL") as? String
+        guard let raw, !raw.hasPrefix("$("), !raw.isEmpty else { return }
+        #expect(AppSettings.baseURL.absoluteString == raw)
     }
 
-    @Test("Surrounding whitespace is trimmed")
-    func trimsWhitespace() {
-        #expect(AppSettings.normalizedURL(from: "  http://example.com  ")?.host == "example.com")
-    }
-
-    @Test("A bare word is accepted as an intranet hostname")
-    func acceptsBareHostname() {
-        // `http://nesteferge-box` is a legitimate address on a local network, so
-        // this must not be rejected just because it has no dot.
-        #expect(AppSettings.normalizedURL(from: "nesteferge-box")?.host == "nesteferge-box")
-    }
-
-    @Test("Unusable input is rejected", arguments: ["", "   ", "ftp://example.com", "not a url", "http://"])
-    func rejectsBadInput(_ raw: String) {
-        #expect(AppSettings.normalizedURL(from: raw) == nil)
-    }
-
-    @Test("An invalid stored value falls back to the default base URL")
-    func fallsBackWhenInvalid() {
-        let settings = makeSettings()
-        settings.baseURLString = "ftp://example.com"
-        #expect(settings.isBaseURLValid == false)
-        #expect(settings.baseURL == AppSettings.normalizedURL(from: AppSettings.defaultBaseURLString))
-    }
-
-    @Test("Base URL persists across instances sharing a defaults suite")
-    func persistsBaseURL() {
-        let name = "nesteferge.tests.\(UUID().uuidString)"
-        let defaults = UserDefaults(suiteName: name)!
-
-        let first = AppSettings(defaults: defaults)
-        first.baseURLString = "https://ferry.example.com"
-
-        let second = AppSettings(defaults: defaults)
-        #expect(second.baseURLString == "https://ferry.example.com")
+    @Test("The base URL is identical for every instance")
+    func baseURLIsFixed() {
+        // There is no in-app editor any more, so this must not vary by instance
+        // or by whatever happens to be in UserDefaults.
+        #expect(makeSettings().baseURL == makeSettings().baseURL)
+        #expect(makeSettings().baseURL == AppSettings.baseURL)
     }
 
     @Test("Selection round-trips, and nil clears it")
@@ -79,9 +57,28 @@ struct AppSettingsTests {
         #expect(settings.loadSelection() == nil)
     }
 
+    @Test("Selection persists across instances sharing a defaults suite")
+    func selectionPersists() {
+        let name = "nesteferge.tests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: name)!
+
+        let selection = FerrySelection(
+            routeID: 7,
+            routeName: "Molde–Vestnes",
+            origin: "Molde",
+            destination: "Vestnes"
+        )
+        AppSettings(defaults: defaults).saveSelection(selection)
+
+        #expect(AppSettings(defaults: defaults).loadSelection() == selection)
+    }
+
     @Test("A one-sided selection still describes itself sensibly")
     func legDescriptionWithoutDestination() {
         let selection = FerrySelection(routeID: 1, routeName: "R", origin: "Festøya", destination: nil)
         #expect(selection.legDescription == "Festøya")
     }
 }
+
+/// Anchor for locating the app bundle from the test bundle.
+private final class BundleMarker {}

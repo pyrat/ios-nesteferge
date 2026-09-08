@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Device builds only. Deliberately empty.
+
+	  The real entitlements file (Nesteferge.entitlements) requests
+	  com.apple.developer.carplay-driving-task, which Apple must grant to the team
+	  and bundle ID before it can appear in a provisioning profile. Until then any
+	  device build fails at the "Prepare packages"/signing stage with:
+
+	    Provisioning profile "..." doesn't include the CarPlay Driving Task App
+	    capability.
+
+	  Pass this file instead to get a signed, installable build on a phone:
+
+	    xcodebuild ... CODE_SIGN_ENTITLEMENTS=Nesteferge/Nesteferge-Device.entitlements
+
+	  The app then runs as a normal iPhone app but does NOT appear on the CarPlay
+	  home screen. CarPlay testing stays on the Simulator via scripts/run-carplay.sh,
+	  which signs with the CarPlay entitlement itself and is unaffected by this file.
+
+	  Delete this file and drop the override once Apple grants the entitlement.
+	-->
+</dict>
+</plist>

@@ -3,10 +3,10 @@
 "app.title" = "Nesteferge";
 
 /* Actions */
+"action.search" = "Søk";
+"action.cancel" = "Avbryt";
 "action.rescan" = "Søk på nytt";
-"action.settings" = "Innstillinger";
 "action.openSettings" = "Åpne Innstillinger";
-"action.done" = "Ferdig";
 
 /* Locating & guessing */
 "locating.status" = "Ser etter ferjer i nærheten …";
@@ -31,6 +31,7 @@
 "day.tomorrow" = "I morgen";
 
 /* Search */
+"search.allRoutes" = "Søk i alle samband";
 "search.prompt" = "Søk etter kai, samband eller sted";
 "search.searching" = "Søker …";
 "search.keepTyping" = "Skriv minst 2 tegn for å søke.";
@@ -50,15 +51,11 @@
 "error.notFound" = "Ikke funnet.";
 "error.invalidRequest" = "Ugyldig forespørsel.";
 
-/* Settings */
-"settings.serverSection" = "Tjener";
-"settings.apiURL" = "API-adresse";
-"settings.urlFooter" = "Nesteferge-API-et appen henter rutetider fra.";
-"settings.invalidURL" = "Skriv inn en gyldig http- eller https-adresse.";
-"settings.reset" = "Tilbakestill til standard";
-"settings.testConnection" = "Test tilkobling";
-"settings.healthOK" = "%1$@ · %2$d kaier · %3$d samband";
-"settings.version" = "Versjon";
+
+/* Nedtelling (CarPlay, minuttoppløsning) */
+"countdown.imminent" = "Under 1 min";
+"countdown.minutes" = "%d min";
+"countdown.hoursMinutes" = "%1$d t %2$d min";
 
 /* CarPlay */
 "carplay.nearbyTitle" = "Ferjer i nærheten";

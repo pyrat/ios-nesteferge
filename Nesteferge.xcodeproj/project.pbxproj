@@ -17,7 +17,6 @@
 		285EDE02CA9C4CBCBE5EE669 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51F44AC1564B8980FF1F61 /* RootView.swift */; };
 		46F44C9F51114BB79D499222 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */; };
 		A8686A1EC7A4438F8F68B9CA /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */; };
-		14EC3E64357F44C4A17EAFB7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A69B01EE034C4390A6F709 /* SettingsView.swift */; };
 		815215B52C184267BB0C4CE3 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD441A4ECF534CCAB11588CC /* CarPlaySceneDelegate.swift */; };
 		C0A01588311240618EA83DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A60BE79FA88749CAA505202E /* Assets.xcassets */; };
 		82DD525AEE9C46398575611D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCFF0CC609D4C2F9B9AD4B6 /* Localizable.strings */; };
@@ -50,7 +49,6 @@
 		7A51F44AC1564B8980FF1F61 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateRow.swift; sourceTree = "<group>"; };
-		C2A69B01EE034C4390A6F709 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FD441A4ECF534CCAB11588CC /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		A60BE79FA88749CAA505202E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DC607088D904012B1AC4B3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				7A51F44AC1564B8980FF1F61 /* RootView.swift */,
 				E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */,
 				DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */,
-				C2A69B01EE034C4390A6F709 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,7 +275,6 @@
 				285EDE02CA9C4CBCBE5EE669 /* RootView.swift in Sources */,
 				46F44C9F51114BB79D499222 /* CountdownView.swift in Sources */,
 				A8686A1EC7A4438F8F68B9CA /* CandidateRow.swift in Sources */,
-				14EC3E64357F44C4A17EAFB7 /* SettingsView.swift in Sources */,
 				815215B52C184267BB0C4CE3 /* CarPlaySceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +342,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				/* Base URL baked into Info.plist; overridable at runtime in the app's Settings. */
-				NESTEFERGE_API_BASE_URL = "http://localhost:8000";
+				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 			};
 			name = Debug;
 		};
@@ -370,7 +366,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-				NESTEFERGE_API_BASE_URL = "http://localhost:8000";
+				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 			};
 			name = Release;
 		};
@@ -383,6 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 9FALWGDAH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Nesteferge/Info.plist;
@@ -408,6 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 9FALWGDAH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Nesteferge/Info.plist;
@@ -430,6 +428,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FALWGDAH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.axb.nesteferge.tests;
@@ -446,6 +445,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FALWGDAH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.axb.nesteferge.tests;

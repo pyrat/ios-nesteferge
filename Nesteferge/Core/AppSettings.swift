@@ -1,25 +1,39 @@
 import Foundation
 import Observation
 
-/// User-adjustable configuration, persisted in `UserDefaults` so the CarPlay
-/// scene and the phone UI read the same values.
+/// App configuration and the small amount of state that must outlive a launch.
+///
+/// The API address is fixed at build time — there is deliberately no in-app
+/// editor for it. Only the user's last ferry choice is persisted, in
+/// `UserDefaults`, so the CarPlay scene and the phone UI agree on it.
 @Observable
 final class AppSettings {
     static let shared = AppSettings()
 
-    /// Compiled-in fallback. Override at runtime in the app's Settings screen,
-    /// or at build time via the `NESTEFERGE_API_BASE_URL` Info.plist value.
-    static let defaultBaseURLString: String = {
-        if let value = Bundle.main.object(forInfoDictionaryKey: "NestefergeAPIBaseURL") as? String,
-           !value.trimmingCharacters(in: .whitespaces).isEmpty,
-           !value.hasPrefix("$(") {
-            return value
-        }
-        return "http://localhost:8000"
+    /// The Nesteferge API, baked in from the `NESTEFERGE_API_BASE_URL` build
+    /// setting via the `NestefergeAPIBaseURL` Info.plist key.
+    ///
+    /// To develop against a local `cmd/ferrytimes-api`, change that build setting
+    /// to `http://localhost:8000`; the ATS exception in Info.plist permits the
+    /// plain-HTTP load. The literal below is the fallback for when the setting is
+    /// missing or left unexpanded (Info.plist keeps the raw `$(...)` token then).
+    static let baseURL: URL = {
+        let fallback = URL(string: "https://nesteferge.no")!
+        guard let raw = Bundle.main.object(forInfoDictionaryKey: "NestefergeAPIBaseURL") as? String
+        else { return fallback }
+
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, !trimmed.hasPrefix("$("),
+              let url = URL(string: trimmed),
+              let scheme = url.scheme?.lowercased(),
+              scheme == "http" || scheme == "https",
+              let host = url.host, !host.isEmpty
+        else { return fallback }
+
+        return url
     }()
 
     private enum Keys {
-        static let baseURL = "nesteferge.apiBaseURL"
         static let selection = "nesteferge.selection"
     }
 
@@ -27,44 +41,10 @@ final class AppSettings {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        self.baseURLString = defaults.string(forKey: Keys.baseURL) ?? Self.defaultBaseURLString
     }
 
-    var baseURLString: String {
-        didSet {
-            guard baseURLString != oldValue else { return }
-            defaults.set(baseURLString, forKey: Keys.baseURL)
-        }
-    }
-
-    /// The configured base URL, falling back to the default when the user has
-    /// typed something unusable.
-    var baseURL: URL {
-        Self.normalizedURL(from: baseURLString)
-            ?? Self.normalizedURL(from: Self.defaultBaseURLString)
-            ?? URL(string: "http://localhost:8000")!
-    }
-
-    var isBaseURLValid: Bool {
-        Self.normalizedURL(from: baseURLString) != nil
-    }
-
-    func resetBaseURL() {
-        baseURLString = Self.defaultBaseURLString
-    }
-
-    /// Accepts `host:port` as well as full URLs, and rejects anything without a host.
-    static func normalizedURL(from raw: String) -> URL? {
-        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return nil }
-        let withScheme = trimmed.contains("://") ? trimmed : "http://\(trimmed)"
-        guard let url = URL(string: withScheme),
-              let scheme = url.scheme?.lowercased(),
-              scheme == "http" || scheme == "https",
-              let host = url.host, !host.isEmpty
-        else { return nil }
-        return url
-    }
+    /// Instance accessor, so call sites and tests need not reach for the type.
+    var baseURL: URL { Self.baseURL }
 
     // MARK: - Last selection
 
