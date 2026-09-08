@@ -4,14 +4,28 @@ Working copy of the request submitted to Apple for the CarPlay **Driving Task**
 entitlement, kept in the repo so the wording can be revised if the first attempt
 is denied.
 
-- **Submit at:** <https://developer.apple.com/contact/carplay/>
+- **Submit at:** <https://developer.apple.com/contact/carplay> (behind Apple ID
+  sign-in; use the Account Holder for team 9FALWGDAH9, since accepting the
+  CarPlay Entitlement Addendum needs that role)
 - **Entitlement:** `com.apple.developer.carplay-driving-task` (iOS 16+)
 - **Status:** not yet submitted
 - **Submitted on:** —
 - **Outcome:** —
 
-Apple grants the entitlement to the *developer account*, not to a bundle ID. You
-also have to agree to the CarPlay Entitlement Addendum as part of the request.
+**The form is the whole first step.** No build, TestFlight release or App Store
+listing is required — Apple reviews the written description against predefined
+criteria, then adds the entitlement to the *developer account* as a managed
+capability. It is not granted to a bundle ID. Submitting early therefore costs
+nothing: the review runs while the app is unchanged.
+
+> Apple's [Requesting CarPlay Entitlements](https://developer.apple.com/documentation/carplay/requesting-carplay-entitlements)
+> page lists only six entitlements and omits the driving task one. That page is
+> out of date; the CarPlay Developer Guide (2026-06-08) lists
+> `com.apple.developer.carplay-driving-task` as available since iOS 16. Select
+> **Driving Task** on the form regardless of what that page shows.
+
+Note also that CarPlay apps face an *additional* set of App Store Review
+guidelines at submission time, separate from this entitlement grant.
 
 ---
 
@@ -24,8 +38,8 @@ but the app silently never appears in the car:
 1. **Identifiers → create an explicit App ID** for `com.axb.nesteferge`. The team
    currently signs against the wildcard profile `9FALWGDAH9.*`, and wildcard App
    IDs cannot carry CarPlay capabilities.
-2. **Enable the CarPlay capability on that App ID → Save → generate a new
-   provisioning profile**, then import it into Xcode.
+2. **App ID → Additional Capabilities tab → enable CarPlay → Save**, then
+   generate a new provisioning profile and import it into Xcode.
 3. **Turn off automatic signing** and point `CODE_SIGN_ENTITLEMENTS` back at
    `Nesteferge/Nesteferge.entitlements` (which already declares the key), dropping
    the `Nesteferge-Device.entitlements` override used for device builds today.
