@@ -2,7 +2,7 @@
 
 Native iOS client for the [Nesteferge](../nesteferge) ferry timetable API. Finds the
 Norwegian ferry you are driving towards from your GPS position and heading, then
-counts down to the next departure. Runs on iPhone, iPad and CarPlay.
+counts down to the next departure. Runs on iPhone and iPad.
 
 Deliberately plain: stock SwiftUI controls, system fonts and colours, Dynamic Type
 and dark mode for free. The only colour in the app is the countdown turning amber
@@ -59,9 +59,13 @@ asserts the two cannot silently drift apart.
 
 ## CarPlay
 
-The CarPlay scene is declared in `Info.plist` under
-`CPTemplateApplicationSceneSessionRoleApplication` and handled by
-`CarPlaySceneDelegate`.
+CarPlay is implemented but not included in the initial App Store release while
+Apple reviews the required driving-task entitlement. It will be enabled in a
+future release after approval.
+
+The implementation remains available for development. The CarPlay scene must be
+restored to `Info.plist` and the approved entitlement restored to the release
+configuration before it can ship.
 
 To test it:
 
