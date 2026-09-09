@@ -62,12 +62,26 @@
 		<true/>
 		<key>UISceneConfigurations</key>
 		<dict>
-			<!-- SwiftUI installs the phone window scene delegate. -->
+			<!--
+			  SwiftUI installs the phone window scene delegate. The CarPlay entry is
+			  routed directly to CarPlaySceneDelegate.
+			-->
 			<key>UIWindowSceneSessionRoleApplication</key>
 			<array>
 				<dict>
 					<key>UISceneConfigurationName</key>
 					<string>Default</string>
+				</dict>
+			</array>
+			<key>CPTemplateApplicationSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>CarPlay</string>
+					<key>UISceneClassName</key>
+					<string>CPTemplateApplicationScene</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).CarPlaySceneDelegate</string>
 				</dict>
 			</array>
 		</dict>

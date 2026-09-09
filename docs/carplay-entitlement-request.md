@@ -8,9 +8,9 @@ is denied.
   sign-in; use the Account Holder for team 9FALWGDAH9, since accepting the
   CarPlay Entitlement Addendum needs that role)
 - **Entitlement:** `com.apple.developer.carplay-driving-task` (iOS 16+)
-- **Status:** not yet submitted
+- **Status:** approved
 - **Submitted on:** —
-- **Outcome:** —
+- **Outcome:** approved
 
 **The form is the whole first step.** No build, TestFlight release or App Store
 listing is required — Apple reviews the written description against predefined
