@@ -31,7 +31,15 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 
-	<!-- Base URL for the Nesteferge Go API. Overridable at runtime in Settings. -->
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+
+	<!-- Base URL for the Nesteferge Go API, fixed at build time. -->
 	<key>NestefergeAPIBaseURL</key>
 	<string>$(NESTEFERGE_API_BASE_URL)</string>
 

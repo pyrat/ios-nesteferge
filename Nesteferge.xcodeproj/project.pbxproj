@@ -7,23 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5430A9B57324057ABF9FE14 /* NestefergeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */; };
-		9AFEEF5453A440768B421719 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D856EDA2454202AA319C45 /* Models.swift */; };
-		5D62246394BF4852AEAEFF03 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BBB09BB3774BC38D8BE33A /* APIClient.swift */; };
-		9E68AA77F2104522B265B0B8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599D94966AE441228A17E27F /* AppSettings.swift */; };
-		E0EADC6E76E0470585C3694F /* DepartureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D685AEAB66642E08BF563E3 /* DepartureFormatter.swift */; };
-		E1F9DF53B8654F67AC100D60 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */; };
+		B73F1894563143178FF4A101 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B73F1894563143178FF4A102 /* PrivacyInfo.xcprivacy */; };
 		01DA091137C042F1B80FC0DF /* FerryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926278C746A9451DAF12BAA5 /* FerryStore.swift */; };
+		20A370F379AE48498FBCE8C2 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA9BD717E24AB58E553014 /* APIClientTests.swift */; };
 		285EDE02CA9C4CBCBE5EE669 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51F44AC1564B8980FF1F61 /* RootView.swift */; };
 		46F44C9F51114BB79D499222 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */; };
-		A8686A1EC7A4438F8F68B9CA /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */; };
+		5D62246394BF4852AEAEFF03 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BBB09BB3774BC38D8BE33A /* APIClient.swift */; };
 		815215B52C184267BB0C4CE3 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD441A4ECF534CCAB11588CC /* CarPlaySceneDelegate.swift */; };
-		C0A01588311240618EA83DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A60BE79FA88749CAA505202E /* Assets.xcassets */; };
 		82DD525AEE9C46398575611D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCFF0CC609D4C2F9B9AD4B6 /* Localizable.strings */; };
 		8457CE61313F4C1CAC8D5AF0 /* ModelDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E8EEB6242D46FA82C071DD /* ModelDecodingTests.swift */; };
-		EECD4230C0A44723B560D511 /* DepartureFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5CA49827D649ED9AE11C1C /* DepartureFormatterTests.swift */; };
+		9AFEEF5453A440768B421719 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D856EDA2454202AA319C45 /* Models.swift */; };
+		9E68AA77F2104522B265B0B8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599D94966AE441228A17E27F /* AppSettings.swift */; };
+		A5430A9B57324057ABF9FE14 /* NestefergeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */; };
+		A8686A1EC7A4438F8F68B9CA /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */; };
+		C0A01588311240618EA83DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A60BE79FA88749CAA505202E /* Assets.xcassets */; };
 		DD034551BBDF43BBB2D7CF38 /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A958AA01A4453886FFD3D6 /* AppSettingsTests.swift */; };
-		20A370F379AE48498FBCE8C2 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA9BD717E24AB58E553014 /* APIClientTests.swift */; };
+		E0EADC6E76E0470585C3694F /* DepartureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D685AEAB66642E08BF563E3 /* DepartureFormatter.swift */; };
+		E1F9DF53B8654F67AC100D60 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */; };
+		EECD4230C0A44723B560D511 /* DepartureFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5CA49827D649ED9AE11C1C /* DepartureFormatterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,40 +38,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DCBC122F8BEF4E0F802F2AC4 /* Nesteferge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nesteferge.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C524A77C136476DBFF7E171 /* NestefergeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NestefergeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestefergeApp.swift; sourceTree = "<group>"; };
-		79D856EDA2454202AA319C45 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		91BBB09BB3774BC38D8BE33A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B73F1894563143178FF4A102 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		2CA5A00FF00A4CBEAF79A678 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DC607088D904012B1AC4B3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4A5CA49827D649ED9AE11C1C /* DepartureFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureFormatterTests.swift; sourceTree = "<group>"; };
+		4F417917324C414AB909407B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		599D94966AE441228A17E27F /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		6D685AEAB66642E08BF563E3 /* DepartureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureFormatter.swift; sourceTree = "<group>"; };
-		0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		926278C746A9451DAF12BAA5 /* FerryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryStore.swift; sourceTree = "<group>"; };
+		79D856EDA2454202AA319C45 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7A51F44AC1564B8980FF1F61 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
-		DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateRow.swift; sourceTree = "<group>"; };
-		FD441A4ECF534CCAB11588CC /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
-		A60BE79FA88749CAA505202E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3DC607088D904012B1AC4B3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4F417917324C414AB909407B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B74CBCB170AA49DD8A7EC56A /* nn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nn; path = nn.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2CA5A00FF00A4CBEAF79A678 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3B36A2ACED447D1A79C5C41 /* Nesteferge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nesteferge.entitlements; sourceTree = "<group>"; };
-		94E8EEB6242D46FA82C071DD /* ModelDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDecodingTests.swift; sourceTree = "<group>"; };
-		4A5CA49827D649ED9AE11C1C /* DepartureFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureFormatterTests.swift; sourceTree = "<group>"; };
 		83A958AA01A4453886FFD3D6 /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTests.swift; sourceTree = "<group>"; };
+		8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestefergeApp.swift; sourceTree = "<group>"; };
+		8C524A77C136476DBFF7E171 /* NestefergeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NestefergeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		91BBB09BB3774BC38D8BE33A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		926278C746A9451DAF12BAA5 /* FerryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryStore.swift; sourceTree = "<group>"; };
+		94E8EEB6242D46FA82C071DD /* ModelDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDecodingTests.swift; sourceTree = "<group>"; };
+		A60BE79FA88749CAA505202E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B74CBCB170AA49DD8A7EC56A /* nn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nn; path = nn.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CBEA9BD717E24AB58E553014 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		DCBC122F8BEF4E0F802F2AC4 /* Nesteferge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nesteferge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF2ABAAA278742F992F1E4AA /* CandidateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateRow.swift; sourceTree = "<group>"; };
+		E2D2BCAB5E314C42B9B40088 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		F3B36A2ACED447D1A79C5C41 /* Nesteferge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nesteferge.entitlements; sourceTree = "<group>"; };
+		FD441A4ECF534CCAB11588CC /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E1B102195C9C498BB54028E3 /* Frameworks */ = {
+		138B4B66077942999BD4F1ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		138B4B66077942999BD4F1ED /* Frameworks */ = {
+		E1B102195C9C498BB54028E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,59 +82,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		801F99BDDFC142458CA1C1AF = {
-			isa = PBXGroup;
-			children = (
-				EEE33058776849FD9AD4E054 /* Nesteferge */,
-				5B4DD14E32944F739D06FBA2 /* NestefergeTests */,
-				CF1C4A9757EB4803AE5D1DA3 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		CF1C4A9757EB4803AE5D1DA3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DCBC122F8BEF4E0F802F2AC4 /* Nesteferge.app */,
-				8C524A77C136476DBFF7E171 /* NestefergeTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EEE33058776849FD9AD4E054 /* Nesteferge */ = {
-			isa = PBXGroup;
-			children = (
-				880C646C4A274774B95554DC /* App */,
-				EB7DA7B17B454F64AD901C56 /* Core */,
-				217D6271D83E49868D477937 /* Views */,
-				2E04C07C3B604102BA83FE87 /* CarPlay */,
-				8B2FDE82A6424325BC8994F8 /* Resources */,
-				2CA5A00FF00A4CBEAF79A678 /* Info.plist */,
-				F3B36A2ACED447D1A79C5C41 /* Nesteferge.entitlements */,
-			);
-			path = Nesteferge;
-			sourceTree = "<group>";
-		};
-		880C646C4A274774B95554DC /* App */ = {
-			isa = PBXGroup;
-			children = (
-				8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		EB7DA7B17B454F64AD901C56 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				79D856EDA2454202AA319C45 /* Models.swift */,
-				91BBB09BB3774BC38D8BE33A /* APIClient.swift */,
-				599D94966AE441228A17E27F /* AppSettings.swift */,
-				6D685AEAB66642E08BF563E3 /* DepartureFormatter.swift */,
-				0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */,
-				926278C746A9451DAF12BAA5 /* FerryStore.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		217D6271D83E49868D477937 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,15 +100,6 @@
 			path = CarPlay;
 			sourceTree = "<group>";
 		};
-		8B2FDE82A6424325BC8994F8 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A60BE79FA88749CAA505202E /* Assets.xcassets */,
-				9FCFF0CC609D4C2F9B9AD4B6 /* Localizable.strings */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		5B4DD14E32944F739D06FBA2 /* NestefergeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +109,69 @@
 				CBEA9BD717E24AB58E553014 /* APIClientTests.swift */,
 			);
 			path = NestefergeTests;
+			sourceTree = "<group>";
+		};
+		801F99BDDFC142458CA1C1AF = {
+			isa = PBXGroup;
+			children = (
+				EEE33058776849FD9AD4E054 /* Nesteferge */,
+				5B4DD14E32944F739D06FBA2 /* NestefergeTests */,
+				CF1C4A9757EB4803AE5D1DA3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		880C646C4A274774B95554DC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8BD9CBB01E924C6D97AAB633 /* NestefergeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8B2FDE82A6424325BC8994F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A60BE79FA88749CAA505202E /* Assets.xcassets */,
+				B73F1894563143178FF4A102 /* PrivacyInfo.xcprivacy */,
+				9FCFF0CC609D4C2F9B9AD4B6 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CF1C4A9757EB4803AE5D1DA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCBC122F8BEF4E0F802F2AC4 /* Nesteferge.app */,
+				8C524A77C136476DBFF7E171 /* NestefergeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB7DA7B17B454F64AD901C56 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				79D856EDA2454202AA319C45 /* Models.swift */,
+				91BBB09BB3774BC38D8BE33A /* APIClient.swift */,
+				599D94966AE441228A17E27F /* AppSettings.swift */,
+				6D685AEAB66642E08BF563E3 /* DepartureFormatter.swift */,
+				0EEF6CC25EB64DB19BB1F022 /* LocationService.swift */,
+				926278C746A9451DAF12BAA5 /* FerryStore.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EEE33058776849FD9AD4E054 /* Nesteferge */ = {
+			isa = PBXGroup;
+			children = (
+				880C646C4A274774B95554DC /* App */,
+				EB7DA7B17B454F64AD901C56 /* Core */,
+				217D6271D83E49868D477937 /* Views */,
+				2E04C07C3B604102BA83FE87 /* CarPlay */,
+				8B2FDE82A6424325BC8994F8 /* Resources */,
+				2CA5A00FF00A4CBEAF79A678 /* Info.plist */,
+				F3B36A2ACED447D1A79C5C41 /* Nesteferge.entitlements */,
+			);
+			path = Nesteferge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0A01588311240618EA83DE6 /* Assets.xcassets in Resources */,
+				B73F1894563143178FF4A101 /* PrivacyInfo.xcprivacy in Resources */,
 				82DD525AEE9C46398575611D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +265,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4F417917324C414AB909407C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8457CE61313F4C1CAC8D5AF0 /* ModelDecodingTests.swift in Sources */,
+				EECD4230C0A44723B560D511 /* DepartureFormatterTests.swift in Sources */,
+				DD034551BBDF43BBB2D7CF38 /* AppSettingsTests.swift in Sources */,
+				20A370F379AE48498FBCE8C2 /* APIClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B591B30B60B941A2A7E25EF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,17 +291,6 @@
 				46F44C9F51114BB79D499222 /* CountdownView.swift in Sources */,
 				A8686A1EC7A4438F8F68B9CA /* CandidateRow.swift in Sources */,
 				815215B52C184267BB0C4CE3 /* CarPlaySceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F417917324C414AB909407C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8457CE61313F4C1CAC8D5AF0 /* ModelDecodingTests.swift in Sources */,
-				EECD4230C0A44723B560D511 /* DepartureFormatterTests.swift in Sources */,
-				DD034551BBDF43BBB2D7CF38 /* AppSettingsTests.swift in Sources */,
-				20A370F379AE48498FBCE8C2 /* APIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,13 +340,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				/* Base URL baked into Info.plist; overridable at runtime in the app's Settings. */
-				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 			};
 			name = Debug;
 		};
@@ -362,11 +365,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-				NESTEFERGE_API_BASE_URL = "https://nesteferge.no";
 			};
 			name = Release;
 		};
@@ -376,6 +379,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Nesteferge/Nesteferge.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -391,6 +395,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.axb.nesteferge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -402,6 +407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Nesteferge/Nesteferge.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -417,6 +423,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.axb.nesteferge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -459,20 +466,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2CA5A00FF00A4CBEAF79A679 /* Build configuration list for PBXProject "Nesteferge" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1000000000000000000001 /* Debug */,
-				A1000000000000000000002 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0751550D86744149BDF5329C /* Build configuration list for PBXNativeTarget "Nesteferge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1000000000000000000003 /* Debug */,
 				A1000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CA5A00FF00A4CBEAF79A679 /* Build configuration list for PBXProject "Nesteferge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000000000000000000001 /* Debug */,
+				A1000000000000000000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
