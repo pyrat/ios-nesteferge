@@ -212,7 +212,8 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         if let next = store.nextDeparture {
             items.append(CPInformationItem(
                 title: DepartureFormatter.dayLabel(next.departAt),
-                detail: DepartureFormatter.clock(next.departAt)
+                detail: [DepartureFormatter.clock(next.departAt), next.remarks]
+                    .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
             ))
         } else if let error = store.departuresError {
             items.append(CPInformationItem(
@@ -232,7 +233,8 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
                     format: String(localized: "carplay.then", defaultValue: "Then · %@"),
                     DepartureFormatter.dayLabel(departure.departAt)
                 ),
-                detail: DepartureFormatter.clock(departure.departAt)
+                detail: [DepartureFormatter.clock(departure.departAt), departure.remarks]
+                    .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
             ))
         }
 

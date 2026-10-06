@@ -18,6 +18,7 @@ struct RootView: View {
 
     @State private var searchText = ""
     @State private var isSearchActive = false
+    @State private var isAboutPresented = false
     @FocusState private var isSearchFieldFocused: Bool
 
     var body: some View {
@@ -36,6 +37,30 @@ struct RootView: View {
         }
         .tint(FerryTheme.accent)
         .preferredColorScheme(.dark)
+        .sheet(isPresented: $isAboutPresented) {
+            NavigationStack {
+                Form {
+                    Section {
+                        Text("about.attribution")
+                        Link("about.licence", destination: URL(string: "https://data.norge.no/nlod/no/2.0")!)
+                        Text("about.processing")
+                        Text("about.independent")
+                        Link("about.sources", destination: URL(string: "https://nesteferge.no/sources/")!)
+                    }
+                    Section {
+                        Link("about.privacy", destination: URL(string: "https://nesteferge.no/privacy/")!)
+                        Link("about.support", destination: URL(string: "https://nesteferge.no/support/")!)
+                    }
+                }
+                .navigationTitle(Text("about.title"))
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("action.close") { isAboutPresented = false }
+                    }
+                }
+            }
+            .preferredColorScheme(.dark)
+        }
         .task { store.start() }
         .onChange(of: scenePhase) { _, phase in
             phase == .active ? store.resumeTimers() : store.suspendTimers()
@@ -83,6 +108,11 @@ struct RootView: View {
                 .foregroundStyle(FerryTheme.accent)
 
             Spacer()
+
+            Button { isAboutPresented = true } label: {
+                Image(systemName: "info.circle")
+            }
+            .accessibilityLabel(Text("about.title"))
 
             if showsSearch {
                 Button { activateSearch() } label: {

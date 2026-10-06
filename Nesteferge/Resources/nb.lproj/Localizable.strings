@@ -2,6 +2,17 @@
 
 "app.title" = "Nesteferge";
 
+/* Datakilder og personvern */
+"about.title" = "Om Nesteferge";
+"action.close" = "Ferdig";
+"about.attribution" = "Inneholder data under Norsk lisens for offentlige data (NLOD) tilgjengeliggjort av Entur AS.";
+"about.licence" = "NLOD 2.0-lisens";
+"about.processing" = "Vi omformer Enturs ruter, holdeplasser og driftsdatoer til søkbare samband og planlagte avganger. Navn kan være forkortet. Tidene er rutetider, ikke sanntidsprognoser. Sjekk operatøren for driftsavvik og bestillingskrav.";
+"about.independent" = "Nesteferge er et uavhengig prosjekt, ikke godkjent eller anbefalt av Entur eller fergeoperatørene.";
+"about.sources" = "Datakilder og bearbeiding";
+"about.privacy" = "Personvernerklæring";
+"about.support" = "Hjelp og kontakt";
+
 /* Actions */
 "action.search" = "Søk";
 "action.cancel" = "Avbryt";

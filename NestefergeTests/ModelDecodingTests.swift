@@ -177,4 +177,24 @@ struct ModelDecodingTests {
         let response = try decode(ErrorResponse.self, from: #"{ "detail": "route not found" }"#)
         #expect(response.detail == "route not found")
     }
+
+    @Test("Entur IDs and additive source metadata preserve the client contract")
+    func enturDepartures() throws {
+        let response = try decode(RouteNextResponse.self, from: """
+        {
+          "route": { "id": 205280253156984, "name": "Anda–Lote · 1044", "from_stop": "Anda", "to_stop": "Lote" },
+          "origin": "Anda",
+          "departures": [{
+            "direction": "Anda->Lote", "depart_time": "23:50", "arrive_time": "00:01",
+            "day_type": "dated", "remarks": "Anløp på bestilling / Request stop",
+            "depart_at": "2026-12-24T23:50:00+01:00", "seconds_until": 300
+          }],
+          "data_source": { "name": "Entur", "valid_from": "2026-10-06", "valid_to": "2027-01-03" }
+        }
+        """)
+        #expect(response.route.id == 205280253156984)
+        #expect(response.departures.first?.dayType == "dated")
+        #expect(response.departures.first?.remarks == "Anløp på bestilling / Request stop")
+        #expect(response.departures.first?.arriveTime == "00:01")
+    }
 }

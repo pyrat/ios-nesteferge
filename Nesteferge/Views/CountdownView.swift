@@ -32,13 +32,24 @@ struct CountdownView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
 
+            if let remarks = store.nextDeparture?.remarks, !remarks.isEmpty {
+                Text(remarks)
+                    .font(.footnote)
+                    .foregroundStyle(FerryTheme.muted)
+            }
+
             if !store.followingDepartures.isEmpty {
                 VStack(spacing: 0) {
                     ForEach(store.followingDepartures) { departure in
-                        HStack {
-                            Text(DepartureFormatter.dayLabel(departure.departAt))
-                            Spacer()
-                            Text(DepartureFormatter.clock(departure.departAt)).monospacedDigit().foregroundStyle(FerryTheme.text)
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text(DepartureFormatter.dayLabel(departure.departAt))
+                                Spacer()
+                                Text(DepartureFormatter.clock(departure.departAt)).monospacedDigit().foregroundStyle(FerryTheme.text)
+                            }
+                            if let remarks = departure.remarks, !remarks.isEmpty {
+                                Text(remarks).font(.footnote)
+                            }
                         }
                         .font(.subheadline)
                         .foregroundStyle(FerryTheme.muted)

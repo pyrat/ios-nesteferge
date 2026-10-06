@@ -2,6 +2,17 @@
 
 "app.title" = "Nesteferge";
 
+/* Data sources and privacy */
+"about.title" = "About Nesteferge";
+"action.close" = "Done";
+"about.attribution" = "Contains data under the Norwegian Licence for Open Government Data (NLOD), made available by Entur AS.";
+"about.licence" = "NLOD 2.0 licence";
+"about.processing" = "We turn Entur routes, stops and operating dates into searchable crossings and scheduled departures. Names may be shortened. Times are scheduled, not real-time predictions. Check the operator for disruptions and booking requirements.";
+"about.independent" = "Nesteferge is an independent project, not endorsed by Entur or the ferry operators.";
+"about.sources" = "Data sources and processing";
+"about.privacy" = "Privacy policy";
+"about.support" = "Help and support";
+
 /* Actions */
 "action.search" = "Search";
 "action.cancel" = "Cancel";
