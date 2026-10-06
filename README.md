@@ -1,7 +1,7 @@
 # Nesteferge for iOS
 
 Native iOS client for the [Nesteferge](../nesteferge) ferry timetable API. Finds the
-Norwegian ferry you are driving towards from your GPS position and heading, then
+Norwegian ferries near your GPS position, then
 counts down to the next departure. Runs on iPhone, iPad and CarPlay.
 
 Deliberately plain: stock SwiftUI controls, system fonts and colours, Dynamic Type
@@ -145,9 +145,8 @@ when the app is not active.
 
 ### Notes on behaviour worth knowing
 
-- **Heading**: the GPS course is only trusted while actually moving
-  (`speed > 0.5 m/s`); otherwise the magnetic compass is used, which is the only
-  useful signal when sitting stationary at a quay. This mirrors the web app.
+- **Nearby ferries** are ranked using GPS position only, without compass heading
+  or travel direction.
 - **Times** are always rendered in `Europe/Oslo` regardless of device time zone,
   because that is what the API's schedules mean. "Today"/"Tomorrow" are compared
   in Oslo calendar days for the same reason.

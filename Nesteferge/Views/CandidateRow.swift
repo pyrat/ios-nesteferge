@@ -3,7 +3,6 @@ import SwiftUI
 struct CandidateRow: View {
     let candidate: GuessCandidate
     let isBestGuess: Bool
-    let showsHeadingOffset: Bool
     let isSelected: Bool
 
     var body: some View {
@@ -30,9 +29,6 @@ struct CandidateRow: View {
 
             VStack(alignment: .trailing, spacing: 4) {
                 if let distance = distanceText { Text(distance) }
-                if showsHeadingOffset, let offset = candidate.headingOffsetDeg {
-                    Text(DepartureFormatter.headingOffset(degrees: offset))
-                }
             }
             .font(.caption)
             .foregroundStyle(FerryTheme.muted)

@@ -21,7 +21,7 @@
 
 /* Locating & guessing */
 "locating.status" = "Ser etter ferjer i nærheten …";
-"locating.hint" = "Bruker GPS og retning for å gjette hvilken ferje du kjører mot.";
+"locating.hint" = "Bruker GPS-posisjonen din til å finne ferjer i nærheten.";
 "guess.emptyTitle" = "Fant ingen ferje";
 "guess.none" = "Ingen norske ferjekaier innenfor 600 km. Søk etter et samband i stedet, eller søk på nytt når du er nærmere.";
 
@@ -30,8 +30,7 @@
 "candidate.bestGuess" = "Beste gjett";
 "candidate.selected" = "Valgt";
 "candidate.offCourse" = "%d° unna kursen";
-"hint.heading" = "Toppvalget vekter avstand høyest og retning som støtte. Trykk på et annet hvis det er feil.";
-"hint.noHeading" = "Sortert etter avstand (ingen retning tilgjengelig). Trykk på ferja di.";
+"hint.distance" = "Sortert etter avstand fra GPS-posisjonen din. Trykk på ferja di.";
 "hint.search" = "Søkeresultater. Trykk på sambandet ditt.";
 
 /* Departures */

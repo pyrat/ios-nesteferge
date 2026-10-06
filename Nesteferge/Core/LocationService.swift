@@ -2,11 +2,7 @@ import CoreLocation
 import Foundation
 import Observation
 
-/// Location + heading provider.
-///
-/// Heading policy matches the web app: prefer the GPS course while actually
-/// moving (it reflects travel direction), otherwise fall back to the magnetic
-/// compass, which is the only useful signal when stationary at a quay.
+/// GPS position provider for nearby ferry selection.
 @Observable
 @MainActor
 final class LocationService: NSObject {
@@ -35,16 +31,11 @@ final class LocationService: NSObject {
     struct Fix: Equatable {
         let latitude: Double
         let longitude: Double
-        /// Compass degrees, `0..<360`, or nil when no trustworthy heading exists.
-        let heading: Double?
     }
 
-    /// Speeds below this (m/s) make the GPS course meaningless.
-    private static let minimumCourseSpeed: CLLocationSpeed = 0.5
     private static let fixTimeout: Duration = .seconds(15)
 
     private let manager = CLLocationManager()
-    private var compassHeading: CLLocationDirection?
     private var pendingFix: CheckedContinuation<Fix, Error>?
     private var timeoutTask: Task<Void, Never>?
 
@@ -61,16 +52,6 @@ final class LocationService: NSObject {
         authorizationStatus == .denied || authorizationStatus == .restricted
     }
 
-    /// Start compass updates. Cheap, and gives us a heading before the first fix.
-    func startCompass() {
-        guard CLLocationManager.headingAvailable() else { return }
-        manager.startUpdatingHeading()
-    }
-
-    func stopCompass() {
-        manager.stopUpdatingHeading()
-    }
-
     /// Requests authorization if needed, then resolves a single fix.
     func requestFix() async throws -> Fix {
         switch authorizationStatus {
@@ -83,8 +64,6 @@ final class LocationService: NSObject {
         default:
             break
         }
-
-        startCompass()
 
         // Only one outstanding request at a time; a second caller supersedes the first.
         if let pendingFix {
@@ -123,15 +102,6 @@ final class LocationService: NSObject {
         continuation.resume(throwing: failure)
     }
 
-    private func heading(for location: CLLocation) -> Double? {
-        if location.course >= 0, location.speed > Self.minimumCourseSpeed {
-            return location.course
-        }
-        if let compassHeading, compassHeading >= 0 {
-            return compassHeading
-        }
-        return nil
-    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -149,7 +119,6 @@ extension LocationService: CLLocationManagerDelegate {
             case .authorizedWhenInUse, .authorizedAlways:
                 // Authorization can land after `requestLocation()` was ignored, so retry.
                 if self.pendingFix != nil {
-                    self.startCompass()
                     manager.requestLocation()
                 }
             default:
@@ -163,17 +132,9 @@ extension LocationService: CLLocationManagerDelegate {
         Task { @MainActor in
             let fix = Fix(
                 latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude,
-                heading: self.heading(for: location)
+                longitude: location.coordinate.longitude
             )
             self.finishPendingFix(with: fix)
-        }
-    }
-
-    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        let value = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading
-        Task { @MainActor in
-            self.compassHeading = value >= 0 ? value : nil
         }
     }
 

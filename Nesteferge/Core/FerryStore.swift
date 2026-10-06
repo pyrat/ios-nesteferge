@@ -21,9 +21,6 @@ final class FerryStore {
 
     private(set) var phase: Phase = .idle
     private(set) var candidates: [GuessCandidate] = []
-    /// True when the current candidate list came from `/api/guess` with a heading,
-    /// which is what makes the "off course" figures meaningful.
-    private(set) var hasHeading = false
     /// True when the list came from search rather than a location guess, in which
     /// case there is no "best guess" to badge.
     private(set) var candidatesAreFromSearch = false
@@ -122,11 +119,10 @@ final class FerryStore {
                 let response = try await self.api.guess(
                     baseURL: self.settings.baseURL,
                     lat: fix.latitude,
-                    lng: fix.longitude,
-                    heading: fix.heading
+                    lng: fix.longitude
                 )
                 try Task.checkCancellation()
-                self.applyGuess(response, hadHeading: fix.heading != nil)
+                self.applyGuess(response)
             } catch is CancellationError {
                 return
             } catch {
@@ -135,9 +131,8 @@ final class FerryStore {
         }
     }
 
-    private func applyGuess(_ response: GuessResponse, hadHeading: Bool) {
+    private func applyGuess(_ response: GuessResponse) {
         candidates = response.candidates
-        hasHeading = hadHeading
         candidatesAreFromSearch = false
 
         guard !candidates.isEmpty else {
@@ -189,7 +184,6 @@ final class FerryStore {
             )
         }
         candidatesAreFromSearch = true
-        hasHeading = false
         phase = .loaded
         select(result.selection)
     }

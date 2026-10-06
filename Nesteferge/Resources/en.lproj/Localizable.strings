@@ -21,7 +21,7 @@
 
 /* Locating & guessing */
 "locating.status" = "Looking for ferries nearby…";
-"locating.hint" = "Uses your GPS and heading to guess which ferry you're driving toward.";
+"locating.hint" = "Uses your GPS position to find nearby ferries.";
 "guess.emptyTitle" = "No ferry found";
 "guess.none" = "No Norwegian ferry quays within 600 km of you. Search for a route instead, or rescan when you're closer.";
 
@@ -30,8 +30,7 @@
 "candidate.bestGuess" = "Best guess";
 "candidate.selected" = "Selected";
 "candidate.offCourse" = "%d° off course";
-"hint.heading" = "The top pick weights distance first, with your heading as extra context. Tap another if it's wrong.";
-"hint.noHeading" = "Sorted by distance (no heading available). Tap your ferry.";
+"hint.distance" = "Sorted by distance from your GPS position. Tap your ferry.";
 "hint.search" = "Search results. Tap your route.";
 
 /* Departures */

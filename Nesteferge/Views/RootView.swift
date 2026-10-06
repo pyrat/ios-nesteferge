@@ -101,6 +101,13 @@ struct RootView: View {
     ///   locating and failure screens already show the search field inline.
     private func header(showsSearch: Bool = false) -> some View {
         HStack(spacing: 12) {
+            Button { isAboutPresented = true } label: {
+                Image(systemName: "info.circle")
+                    .frame(width: 44, height: 44)
+                    .contentShape(.rect)
+            }
+            .accessibilityLabel(Text("about.title"))
+
             Text("app.title", comment: "App name shown at the top of the screen")
                 .font(.caption.weight(.bold))
                 .tracking(2.2)
@@ -109,20 +116,19 @@ struct RootView: View {
 
             Spacer()
 
-            Button { isAboutPresented = true } label: {
-                Image(systemName: "info.circle")
-            }
-            .accessibilityLabel(Text("about.title"))
-
             if showsSearch {
                 Button { activateSearch() } label: {
                     Image(systemName: "magnifyingglass")
+                        .frame(width: 44, height: 44)
+                        .contentShape(.rect)
                 }
                 .accessibilityLabel(Text("action.search", comment: "Opens the route search field"))
             }
 
             Button { store.locateAndGuess() } label: {
                 Image(systemName: "location.fill")
+                    .frame(width: 44, height: 44)
+                    .contentShape(.rect)
             }
             .accessibilityLabel(Text("action.rescan", comment: "Search again for nearby ferries"))
             .disabled(store.phase == .locating)
@@ -217,7 +223,6 @@ struct RootView: View {
                             CandidateRow(
                                 candidate: candidate,
                                 isBestGuess: candidate == store.bestGuess,
-                                showsHeadingOffset: store.hasHeading,
                                 isSelected: store.isSelected(candidate)
                             )
                         }
@@ -330,7 +335,7 @@ struct RootView: View {
     }
 
     private var listHint: LocalizedStringKey {
-        store.candidatesAreFromSearch ? "hint.search" : (store.hasHeading ? "hint.heading" : "hint.noHeading")
+        store.candidatesAreFromSearch ? "hint.search" : "hint.distance"
     }
 }
 

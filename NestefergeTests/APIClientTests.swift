@@ -65,31 +65,20 @@ struct APIClientTests {
 
     // MARK: - Request construction
 
-    @Test("Guess request encodes coordinates, heading and radius")
+    @Test("Guess request encodes GPS coordinates and radius without heading")
     func guessQuery() async throws {
         defer { StubURLProtocol.reset() }
         respond(json: #"{ "query": { "lat": 1, "lng": 2, "heading": null, "radius_km": 600 }, "candidates": [] }"#)
 
-        _ = try await makeClient().guess(baseURL: baseURL, lat: 62.375221, lng: 6.331314, heading: 91.28)
+        _ = try await makeClient().guess(baseURL: baseURL, lat: 62.375221, lng: 6.331314)
 
         let url = try #require(StubURLProtocol.lastRequest?.url)
         let query = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false)?.query)
         #expect(url.path == "/api/guess")
         #expect(query.contains("lat=62.375221"))
         #expect(query.contains("lng=6.331314"))
-        #expect(query.contains("heading=91.3"))
-        #expect(query.contains("radius=600.0"))
-    }
-
-    @Test("Heading is omitted entirely when unavailable")
-    func guessWithoutHeading() async throws {
-        defer { StubURLProtocol.reset() }
-        respond(json: #"{ "query": { "lat": 1, "lng": 2, "heading": null, "radius_km": 600 }, "candidates": [] }"#)
-
-        _ = try await makeClient().guess(baseURL: baseURL, lat: 1, lng: 2, heading: nil)
-
-        let query = URLComponents(url: StubURLProtocol.lastRequest!.url!, resolvingAgainstBaseURL: false)?.query ?? ""
         #expect(!query.contains("heading"))
+        #expect(query.contains("radius=600.0"))
     }
 
     @Test("Next-departures request puts the route id in the path and origin in the query")

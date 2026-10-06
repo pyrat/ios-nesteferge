@@ -120,17 +120,13 @@ actor APIClient {
         baseURL: URL,
         lat: Double,
         lng: Double,
-        heading: Double?,
         radiusKm: Double = 600
     ) async throws -> GuessResponse {
-        var params: [String: QueryValue] = [
+        let params: [String: QueryValue] = [
             "lat": .double(lat, decimals: 6),
             "lng": .double(lng, decimals: 6),
             "radius": .double(radiusKm, decimals: 1),
         ]
-        if let heading {
-            params["heading"] = .double(heading, decimals: 1)
-        }
         return try await get(baseURL: baseURL, path: "/api/guess", query: params)
     }
 
