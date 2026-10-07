@@ -218,7 +218,9 @@ struct RootView: View {
 
                 VStack(alignment: .leading, spacing: 10) {
                     sectionLabel("section.nearby")
-                    ForEach(store.candidates, id: \.self) { candidate in
+                    // Search candidates have a NaN distance, so the whole value
+                    // cannot serve as a reflexive, stable identity for SwiftUI.
+                    ForEach(store.candidates, id: \.selection) { candidate in
                         Button { store.select(candidate) } label: {
                             CandidateRow(
                                 candidate: candidate,
