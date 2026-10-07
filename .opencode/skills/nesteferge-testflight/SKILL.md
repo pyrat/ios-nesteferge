@@ -14,6 +14,11 @@ contains the tested upload settings; its repository path is
 - Project/scheme: `Nesteferge.xcodeproj` / `Nesteferge`.
 - Bundle ID: `com.axb.nesteferge`; Apple team: `9FALWGDAH9`.
 - App Store Connect app ID: `6816964574`.
+- `Nesteferge/Info.plist` declares `ITSAppUsesNonExemptEncryption = false`:
+  the app only uses Apple's built-in HTTPS networking. Preserve this declaration
+  to avoid the encryption compliance questionnaire on each upload. Reassess it
+  if custom encryption or cryptographic dependencies are introduced. Confirm the
+  key is present and false in the archived app's `Info.plist` before upload.
 - Use the signed-in Xcode account and automatic signing with
   `-allowProvisioningUpdates`. If authentication fails, ask the user to sign in
   through Xcode Settings > Accounts, then retry the failed step.
